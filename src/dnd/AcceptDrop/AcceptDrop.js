@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 class AcceptDrop extends React.Component {
   constructor(props) {
@@ -9,8 +10,10 @@ class AcceptDrop extends React.Component {
   }
 
   render() {
+    const {isDragging} = this.props;
+    console.log(isDragging)
     return (
-      <div>
+      <div className={classNames('Accepting--Drop', {'dropable': isDragging})}>
         AcceptDrop
       </div>
     )

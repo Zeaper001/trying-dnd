@@ -14,10 +14,9 @@ class Wrapper extends React.Component {
   }
 
   onDragElement(e, type) {
-    console.dir(e.target)
-    console.log(type)
     this.setState({
       events: {
+        isDragging: true,
         draggingItem: type
       }
     });
@@ -25,15 +24,16 @@ class Wrapper extends React.Component {
 
   render() {
     const {acceptedTypes} = this.state
+    const {isDragging, draggingItem} = this.state.events
 
     console.log(this.state)
 
     return (
       <div className="Wrapper--DragAndDrop">
-        <AcceptDrop validTypes={acceptedTypes} />
+        <AcceptDrop validTypes={acceptedTypes} isDragging={isDragging} />
         <DraggableTypes
           onDragEnter={(e, type) => this.onDragElement(e, type)}
-          draggingItem={this.state.events.draggingItem}
+          draggingItem={draggingItem}
           dragTypes={acceptedTypes} />
       </div>
     )
