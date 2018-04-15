@@ -1,5 +1,4 @@
 import React from 'react'
-import {ElementTypes} from '../dnd/ElementTypes'
 
 export const DraggableTypes = ({dragTypes, className, onDragStart, onDragEnd}) => (
   <div className="Draggable--Types">

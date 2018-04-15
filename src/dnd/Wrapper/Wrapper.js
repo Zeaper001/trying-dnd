@@ -11,7 +11,8 @@ class Wrapper extends React.Component {
       isDraggingOver: false,
       draggingItem: '',
     },
-
+    activeItem: '',
+    droppedElementList: []
   }
 
   //@TODO: Clean up functions. -> export DragAndDrop.js
@@ -22,11 +23,12 @@ class Wrapper extends React.Component {
         ...this.state.events,
         isDragging: true,
         draggingItem: type
-      }
+      },
+      activeItem: type
     });
   }
 
-  onDragElementEnd(e, type) {
+  onDragElementEnd(e) {
     this.setState({
       events: {
         ...this.state.events,
@@ -36,6 +38,7 @@ class Wrapper extends React.Component {
   }
 
   onDragElementOver(e) {
+    e.preventDefault()
     if(this.state.events.isDraggingOver !== true) {
       this.setState({
         events: {
@@ -55,11 +58,25 @@ class Wrapper extends React.Component {
     })
   }
 
+  onElementDrop(e) {
+    this.setState({
+      events: {
+        ...this.state.events,
+        isDragging: false,
+        isDraggingOver: false,
+      },
+      droppedElementList: [
+        ...this.state.droppedElementList,
+        this.state.activeItem
+      ]
+    })
+  }
+
   render() {
-    const {acceptedTypes} = this.state
+    const {acceptedTypes, droppedElementList} = this.state
     const {isDragging, isDraggingOver, draggingItem} = this.state.events
 
-    console.log(this.state.events)
+    console.log(this.state.droppedElementList)
 
     return (
       <div className="Wrapper--DragAndDrop">
@@ -69,7 +86,9 @@ class Wrapper extends React.Component {
           isDragging={isDragging}
           isDraggingOver={isDraggingOver}
           onDragOver={e => this.onDragElementOver(e)}
-          onDragLeave={e => this.onDragElementLeave(e)} />
+          onDragLeave={e => this.onDragElementLeave(e)}
+          onDrop={e => this.onElementDrop(e)}
+          elementList={droppedElementList} />
 
         <DraggableTypes
           onDragStart={(e, type) => this.onDragElementStart(e, type)}
