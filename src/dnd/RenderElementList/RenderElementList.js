@@ -5,7 +5,7 @@ const RenderElementList = ({elementList}) => {
   return (
     <div>
       {elementList.map((elem, index) => (
-        <div>{elem}</div>
+        <div key={index}>{elem}</div>
       ))}
     </div>
   )
