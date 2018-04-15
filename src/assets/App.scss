@@ -9,6 +9,21 @@
   background: red;
 }
 
+.Accepting--Drop {
+  width: calc(100% - 100px);
+  height: 100vh;
+  background: blue;
+  position: relative;
+  transition: background ease-out 250ms;
+
+  &.dropable {
+    background: lighten(blue, 20%);
+  }
+  &.dragover {
+    background: lighten(green, 20%);
+  }
+}
+
 .Draggable--Types {
   position: absolute;
   width: 100px;

@@ -1,4 +1,6 @@
 import React from 'react'
+import classNames from 'classnames'
+import RenderElementList from '../RenderElementList'
 
 class AcceptDrop extends React.Component {
   constructor(props) {
@@ -9,9 +11,25 @@ class AcceptDrop extends React.Component {
   }
 
   render() {
+    const {
+      isDragging,
+      isDraggingOver,
+      draggingItem,
+      onDragOver,
+      onDragLeave,
+      onDrop,
+      elementList } = this.props;
+
     return (
-      <div>
-        AcceptDrop
+      <div
+        className={classNames('Accepting--Drop', {'dropable': isDragging}, {'dragover': isDraggingOver})}
+        onDragOver={e => onDragOver(e)}
+        onDragLeave={e => onDragLeave(e)}
+        onDrop={e => onDrop(e)}>
+        <RenderElementList elementList={elementList} />
+        {isDragging === true &&
+          <p style={{fontSize: '36px', position: 'absolute', top: '50%', left: '45%'}}>Drop {draggingItem} item here!</p>
+        }
       </div>
     )
   }
