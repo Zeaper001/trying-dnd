@@ -1,10 +1,9 @@
 import React from 'react';
 
-const RenderElementList = ({elementList}) => {
-  console.log(elementList)
+const RenderElementList = ({list}) => {
   return (
     <div>
-      {elementList.map((elem, index) => (
+      {list.map((elem, index) => (
         <div key={index}>{elem}</div>
       ))}
     </div>
